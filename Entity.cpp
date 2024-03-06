@@ -19,9 +19,6 @@ Entity::Entity(const std::string path, float scale, float x, float y, float dx, 
     state_ = new IdleState();
 }
 
-Entity::~Entity(){
-}
-
 void Entity::draw(sf::RenderWindow &window){
     window.draw(sprite_);
 }
@@ -39,9 +36,14 @@ void Player::handleState() {
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
         this->setState(new LeftWalkingState);
     } 
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+        this->setState(new FiringState);
+    } 
     else {this->setState(new IdleState);}
     
     state_->enter(*this);
     state_->update(*this);
+    jumping_->enter(*this);
+    jumping_->update(*this);
     
 }

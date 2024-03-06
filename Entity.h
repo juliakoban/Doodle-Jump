@@ -18,7 +18,7 @@ public:
  
 public:
     Entity(const std::string path, float scale = 1, float x = 0, float y = 0, float dx = 0, float dy = 0);
-    ~Entity();
+    ~Entity() {delete state_;}
     void draw(sf::RenderWindow &window);
     void changeSprite(const std::string path);
     void setState(EntityState* newState) {delete state_; state_ = newState;}
@@ -32,7 +32,8 @@ public:
     
 public:
     Player(const std::string path, float scale = 1, float x = 0, float y = 0, float dx = 0, float dy = 0) :
-    Entity(path, scale, x, y, dx, dy) {}
+    Entity(path, scale, x, y, dx, dy), jumping_(new JumpingState) {}
+    ~Player() {delete jumping_;}
     void handleState();
 };
 
