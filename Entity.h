@@ -7,7 +7,7 @@
 #include "EntityState.h"
 
 class Entity {
-public:
+protected:
     sf::Texture texture_;
     sf::Sprite sprite_;
     float scale_;
@@ -22,12 +22,14 @@ public:
     void draw(sf::RenderWindow &window);
     void changeSprite(const std::string path);
     void setState(EntityState* newState) {delete state_; state_ = newState;}
+    void jump(float acceleration, float jumpHeight);
+    virtual void move(float dx, float dy) {}
     virtual void handleState() {}
     virtual void update() {}
 };
 
 class Player: public Entity {
-public:
+protected:
     EntityState* jumping_;
     
 public:
@@ -35,6 +37,7 @@ public:
     Entity(path, scale, x, y, dx, dy), jumping_(new JumpingState) {}
     ~Player() {delete jumping_;}
     void handleState();
+    void move(float dx, float dy);
 };
 
 #endif // ENTITY_H

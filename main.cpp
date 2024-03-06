@@ -24,7 +24,7 @@ int main(int argc, char const *argv[])
 
     sf::Sprite background(background_texture);
     
-    Player player("./assets/player_right.png", 0.6, 100, 100, 10);
+    Player player("./assets/player_right.png", 0.6, 100, 100);
 
     // run the program as long as the window is open
     while(window.isOpen()){

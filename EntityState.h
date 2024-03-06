@@ -20,12 +20,16 @@ public:
 };
 
 class RightWalkingState: public EntityState {
+private:
+    float speed_ = 10.;
 public:
     void update(Entity& entity) override;   
     void enter(Entity& entity) override;
 };
 
 class LeftWalkingState: public EntityState {
+private:
+    float speed_ = -10.;
 public:
     void update(Entity& entity) override;
     void enter(Entity& entity) override;
@@ -33,8 +37,8 @@ public:
 
 class JumpingState: public EntityState {
 private:
-    float jumpHeight = -14.;
-    float acceleration = 0.4;
+    float jumpHeight_ = -14.;
+    float acceleration_ = 0.4;
 public:
     void update(Entity& entity) override;
     void enter(Entity& entity) override;
