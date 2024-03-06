@@ -1,4 +1,5 @@
 #include "Entity.h"
+#include "Player.h"
 #include "EntityState.h"
 #include <SFML/Graphics.hpp>
 #include <string>
@@ -36,34 +37,4 @@ void Entity::jump(float acceleration, float jumpHeight) {
     y_ += dy_;
     if (y_ > (window_height - height_)) {dy_ = jumpHeight;}
     sprite_.setPosition(x_, y_);
-}
-
-void Player::move(float dx, float dy) {
-    x_ += dx;
-    y_ += dy;
-
-    if (x_ > window_width) {x_ = 0;}
-    else if ((x_ + width_) < 0) {x_ = window_width;}
-
-    sprite_.setPosition(x_, y_);
-}
-
-void Player::handleState() {
-
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-        this->setState(new RightWalkingState);
-    }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-        this->setState(new LeftWalkingState);
-    } 
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-        this->setState(new FiringState);
-    } 
-    else {this->setState(new IdleState);}
-    
-    state_->enter(*this);
-    state_->update(*this);
-    jumping_->enter(*this);
-    jumping_->update(*this);
-    
 }
