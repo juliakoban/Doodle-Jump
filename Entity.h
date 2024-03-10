@@ -8,7 +8,7 @@
 #include "Collider.h"
 
 class Entity {
-protected:
+public:
     sf::Texture texture_;
     sf::Sprite sprite_;
     float scale_;
@@ -27,8 +27,8 @@ public:
     void jump(float acceleration, float jumpHeight);
     virtual void move(float dx, float dy) {}
     virtual void handleState() {}
-    virtual void handleCollision(Entity* entity) {}
-    virtual void update() {}
+    virtual void handleCollision() {}
+    virtual void update(std::vector<Entity*> entities) {}
     bool collidesWith(Entity* other) {return collider_->intersects(other->collider_);}
 };
 

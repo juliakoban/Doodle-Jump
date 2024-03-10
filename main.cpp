@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Entity.h"
 #include <iostream>
+#include <vector>
 
 int main(int argc, char const *argv[])
 {
@@ -21,14 +22,19 @@ int main(int argc, char const *argv[])
 
     sf::Texture background_texture;
     background_texture.loadFromFile("./assets/background.png");
-    
-
     sf::Sprite background(background_texture);
-    
-    Player player("./assets/player_right.png", 0.6, 100, 100);
 
-    Platform platform("./assets/platform.png", 1.2, 100, 400);
-    
+    Player* player = new Player("./assets/player_right.png", 0.6, 100, 100);
+
+    float platformX = 0, platformY = 0;
+    const int numberOfPlatforms = 7;
+
+    std::vector<Entity*> platforms;
+    for (int i = 0; i < numberOfPlatforms; i++) {
+        platformX = rand() % (window_width - 70);
+        platformY = i * (window_height / numberOfPlatforms);
+        platforms.push_back(new Platform("./assets/platform.png", 1.2, platformX, platformY));
+    }
 
     // run the program as long as the window is open
     while(window.isOpen()){
@@ -42,19 +48,37 @@ int main(int argc, char const *argv[])
                 window.close();
         }
 
-        player.update();
-        player.handleCollision(&platform);
-        //player.collidesWith(&platform);
+        player->update(platforms);
+        // window.setView(sf::View(sf::FloatRect(0, player->y_, window_width, window_height)));
 
-        // if entity collidesWith(entity) -> entity handleCollision()
+        if (player->y_ < window_height / 2) {
+            player->y_ = window_height / 2;
+            
+            for (int i = 0; i < numberOfPlatforms; i++) {
+               
+                platforms.at(i)->y_ -= player->dy_;
+                if (platforms.at(i)->y_ > window_height) {
+                    platforms.at(i)->y_ = 0;
+                    platforms.at(i)->x_ = rand() % (window_width - 70);
+                }
+                platforms.at(i)->sprite_.setPosition(platforms.at(i)->x_, platforms.at(i)->y_);
+                platforms.at(i)->collider_->updatePosition(platforms.at(i)->x_, platforms.at(i)->y_);
+            }
+        }
 
         window.draw(background);
-        player.draw(window);
-        platform.draw(window);
-
+        player->draw(window);
+        for(int i = 0; i < platforms.size(); i++) {
+            platforms.at(i)->draw(window);
+        }
         window.display();
-
     }
+
+    delete player;
+    for (auto ptr: platforms) {
+        delete ptr;
+    }
+    platforms.clear();
 
     return 0;
 }

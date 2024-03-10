@@ -5,9 +5,10 @@ const int window_width = 400;
 const int window_height = 533;
 
 void Player::move(float dx, float dy) {
+    
     x_ += dx;
     y_ += dy;
-
+    
     if (x_ > window_width) {x_ = 0;}
     else if ((x_ + width_) < 0) {x_ = window_width;}
 
@@ -35,15 +36,17 @@ void Player::handleState() {
     
 }
 
-void Player::handleCollision(Entity* entity) {
-    
-    if (this->collidesWith(entity)) {
-        // std::cout << "player:" << x_ << " " << y_ << " " << width_ << " " << height_ << std::endl;
-        this->dy_ = -10;
-        // std::cout << "Player has up collision with platform" << std::endl;
-    } 
+void Player::handleCollision() {
+    this->dy_ = -10;
 }
 
-void Player::update() {
+void Player::update(std::vector<Entity*> entities) {
     this->handleState();
+
+    for (int i = 0; i < entities.size(); i++) {
+        if(this->collidesWith(entities.at(i))) {
+            this->handleCollision();
+        }
+    }
+    
 }

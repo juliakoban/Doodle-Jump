@@ -12,9 +12,9 @@ public:
     Entity(path, scale, x, y, dx, dy), jumping_(new JumpingState) {collider_ = new Collider(x_, y_, width_, height_, 25, 0);}
     ~Player() {delete jumping_;}
     void handleState();
-    void handleCollision(Entity* entity);
+    void handleCollision();
     void move(float dx, float dy);
-    void update();
+    void update(std::vector<Entity*> entities);
 };
 
 #endif // PLAYER_H
