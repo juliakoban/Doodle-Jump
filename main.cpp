@@ -27,6 +27,9 @@ int main(int argc, char const *argv[])
     
     Player player("./assets/player_right.png", 0.6, 100, 100);
 
+    Platform platform("./assets/platform.png", 1.2, 100, 400);
+    
+
     // run the program as long as the window is open
     while(window.isOpen()){
 
@@ -39,10 +42,15 @@ int main(int argc, char const *argv[])
                 window.close();
         }
 
-        player.handleState();
+        player.update();
+        player.handleCollision(&platform);
+        //player.collidesWith(&platform);
+
+        // if entity collidesWith(entity) -> entity handleCollision()
 
         window.draw(background);
         player.draw(window);
+        platform.draw(window);
 
         window.display();
 

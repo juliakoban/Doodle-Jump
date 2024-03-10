@@ -12,6 +12,7 @@ void Player::move(float dx, float dy) {
     else if ((x_ + width_) < 0) {x_ = window_width;}
 
     sprite_.setPosition(x_, y_);
+    this->collider_->updatePosition(this->x_, this->y_);
 }
 
 void Player::handleState() {
@@ -27,9 +28,22 @@ void Player::handleState() {
     } 
     else {this->setState(new IdleState);}
     
-    state_->enter(*this);
-    state_->update(*this);
-    jumping_->enter(*this);
-    jumping_->update(*this);
+    state_->enter(this);
+    state_->update(this);
+    jumping_->enter(this);
+    jumping_->update(this);
     
+}
+
+void Player::handleCollision(Entity* entity) {
+    
+    if (this->collidesWith(entity)) {
+        // std::cout << "player:" << x_ << " " << y_ << " " << width_ << " " << height_ << std::endl;
+        this->dy_ = -10;
+        // std::cout << "Player has up collision with platform" << std::endl;
+    } 
+}
+
+void Player::update() {
+    this->handleState();
 }
