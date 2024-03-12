@@ -2,9 +2,6 @@
 #include "Entity.h"
 #include <SFML/Graphics.hpp>
 
-const int window_width = 400;
-const int window_height = 533;
-
 void IdleState::update(Entity* entity) {
     // std::cout << "Handling idle state" << std::endl;   
 }

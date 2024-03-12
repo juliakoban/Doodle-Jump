@@ -4,7 +4,7 @@
 #include "Entity.h"
 
 class Player: public Entity {
-protected:
+private:
     EntityState* jumping_;
     
 public:
@@ -14,7 +14,7 @@ public:
     void handleState();
     void handleCollision();
     void move(float dx, float dy);
-    void update(std::vector<Entity*> entities);
+    void update();
 };
 
 #endif // PLAYER_H

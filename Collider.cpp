@@ -1,13 +1,14 @@
 #include "Collider.h"
 #include <iostream>
 
+
 Collider::Collider(float x, float y, float width, float height, float offsetX, float offsetY) {
     offsetX_ = offsetX;
     offsetY_ = offsetY;
     x_ = x + offsetX_;
     y_ = y - offsetY_;
-    width_ = width - 2* offsetX_;
-    height_ = height + 2 * offsetY_;
+    width_ = width - 2 * offsetX_;
+    height_ = height + offsetY_;
     top = y_;
     bottom = y_ + height_;
     left = x_;

@@ -1,6 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include "Player.h"
 #include "Entity.h"
+#include "Camera.h"
+#include "CollisionHandler.h"
 #include <iostream>
 #include <vector>
 
@@ -24,16 +26,21 @@ int main(int argc, char const *argv[])
     background_texture.loadFromFile("./assets/background.png");
     sf::Sprite background(background_texture);
 
+    // initializing objects
+    CollisionHandler* collisionHandler = new CollisionHandler();
+    Camera* camera = new Camera();
     Player* player = new Player("./assets/player_right.png", 0.6, 100, 100);
 
     float platformX = 0, platformY = 0;
     const int numberOfPlatforms = 7;
 
-    std::vector<Entity*> platforms;
+    // std::vector<Entity*> platforms;
+    std::vector<Entity*> entities;
+    entities.push_back(player);
     for (int i = 0; i < numberOfPlatforms; i++) {
         platformX = rand() % (window_width - 70);
         platformY = i * (window_height / numberOfPlatforms);
-        platforms.push_back(new Platform("./assets/platform.png", 1.2, platformX, platformY));
+        entities.push_back(new Platform("./assets/platform.png", 1.2, platformX, platformY));
     }
 
     // run the program as long as the window is open
@@ -48,37 +55,28 @@ int main(int argc, char const *argv[])
                 window.close();
         }
 
-        player->update(platforms);
-        // window.setView(sf::View(sf::FloatRect(0, player->y_, window_width, window_height)));
+        // updating objects
+        collisionHandler->checkCollisions(entities);
+        camera->movementSimulation(entities);
 
-        if (player->y_ < window_height / 2) {
-            player->y_ = window_height / 2;
-            
-            for (int i = 0; i < numberOfPlatforms; i++) {
-               
-                platforms.at(i)->y_ -= player->dy_;
-                if (platforms.at(i)->y_ > window_height) {
-                    platforms.at(i)->y_ = 0;
-                    platforms.at(i)->x_ = rand() % (window_width - 70);
-                }
-                platforms.at(i)->sprite_.setPosition(platforms.at(i)->x_, platforms.at(i)->y_);
-                platforms.at(i)->collider_->updatePosition(platforms.at(i)->x_, platforms.at(i)->y_);
-            }
+        for(int i = 0; i < entities.size(); i++) {
+            entities.at(i)->update();
         }
 
+        // drawing objects
         window.draw(background);
-        player->draw(window);
-        for(int i = 0; i < platforms.size(); i++) {
-            platforms.at(i)->draw(window);
+        for(int i = 0; i < entities.size(); i++) {
+            entities.at(i)->draw(window);
         }
         window.display();
     }
 
-    delete player;
-    for (auto ptr: platforms) {
+    // clearing memory
+    delete collisionHandler, camera;
+    for (auto ptr: entities) {
         delete ptr;
     }
-    platforms.clear();
+    entities.clear();
 
     return 0;
 }

@@ -7,8 +7,9 @@
 #include "EntityState.h"
 #include "Collider.h"
 
+
 class Entity {
-public:
+protected:
     sf::Texture texture_;
     sf::Sprite sprite_;
     float scale_;
@@ -28,8 +29,14 @@ public:
     virtual void move(float dx, float dy) {}
     virtual void handleState() {}
     virtual void handleCollision() {}
-    virtual void update(std::vector<Entity*> entities) {}
+    virtual void update() {}
     bool collidesWith(Entity* other) {return collider_->intersects(other->collider_);}
+    float getY();
+    float getX();
+    float getDY();
+    void setY(float y);
+    void setX(float x);
+    void subtractDyfromY(float dy);
 };
 
 class Platform: public Entity {
@@ -38,6 +45,7 @@ public:
     Entity(path, scale, x, y, dx, dy) {collider_ = new Collider(x_, y_, width_, height_, 0, 5);}
     void handleState();
     void move(float dx, float dy);
+    void update();
 };
 
 #endif // ENTITY_H

@@ -40,13 +40,6 @@ void Player::handleCollision() {
     this->dy_ = -10;
 }
 
-void Player::update(std::vector<Entity*> entities) {
+void Player::update() {
     this->handleState();
-
-    for (int i = 0; i < entities.size(); i++) {
-        if(this->collidesWith(entities.at(i))) {
-            this->handleCollision();
-        }
-    }
-    
 }

@@ -41,10 +41,39 @@ void Entity::jump(float acceleration, float jumpHeight) {
     this->collider_->updatePosition(this->x_, this->y_);
 }
 
+float Entity::getX() {
+    return this->x_;
+}
+
+float Entity::getY() {
+    return this->y_;
+}
+
+float Entity::getDY() {
+    return this->dy_;
+}
+
+void Entity::setY(float y) {
+    this->y_ = y;
+}
+
+void Entity::setX(float x) {
+    this->x_ = x;
+}
+
+void Entity::subtractDyfromY(float dy) {
+    this->y_ -= dy;
+}
+
 void Platform::handleState() {
     
 }
 
 void Platform::move(float dx, float dy) {
 
+}
+
+void Platform::update() {
+    this->sprite_.setPosition(this->x_, this->y_);
+    this->collider_->updatePosition(this->x_, this->y_);
 }

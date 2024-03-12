@@ -37,7 +37,7 @@ public:
 
 class JumpingState: public EntityState {
 private:
-    float jumpHeight_ = -14.;
+    float jumpHeight_ = -10.;
     float acceleration_ = 0.4;
 public:
     void update(Entity* entity) override;
