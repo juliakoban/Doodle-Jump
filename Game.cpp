@@ -73,6 +73,7 @@ void Game::handleInput() {
     }
     else if(state == GameState::Playing && player->isDead()) {
         std::cout << "death" << std::endl;
+        reset();
         state = GameState::End;
     }
     else if(state == GameState::End && sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter)) {
@@ -82,16 +83,21 @@ void Game::handleInput() {
 
 }
 
+void Game::reset() {
+    for(int i = 0; i < entities.size(); i++) {
+            entities.at(i)->setPosition(window_height, window_height);
+        }
+}
+
 void Game::restart()
 {   
     // score = 0;
     player->restart();
-    startingPlatform->setX(100);
-    startingPlatform->setY(500);
-    // for(int i = 2; i < entities.size(); i++) {
-    //         entities.at(i)->setX(rand() % int(window_width - startingPlatform->getWidth()));
-    //         entities.at(i)->setY(i * (window_height / numberOfPlatforms));
-    //     }
+    startingPlatform->setPosition(100, 500);
+    for(int i = 0; i < (numberOfPlatforms - 1); i++) {
+            entities.at(i + 2)->setPosition(rand() % int(window_width - startingPlatform->getWidth()),
+            i * (window_height / numberOfPlatforms));
+        }
     
 }
 

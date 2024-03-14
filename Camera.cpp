@@ -8,7 +8,7 @@ void Camera::movementSimulation(std::vector<Entity*> gameobjects) {
                 gameobjects.at(i)->subtractDyfromY(gameobjects.at(0)->getDY());
                 if (gameobjects.at(i)->getY() > window_height) {
                     gameobjects.at(i)->setY(0);
-                    gameobjects.at(i)->setX(rand() % (window_width - 70));
+                    gameobjects.at(i)->setX(rand() % int(window_width - gameobjects.at(i)->getWidth()));
                 }
             }
     }

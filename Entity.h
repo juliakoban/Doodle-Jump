@@ -42,6 +42,7 @@ public:
     float getDY();
     void setY(float y);
     void setX(float x);
+    void setPosition(float x, float y);
     void subtractDyfromY(float dy);
 };
 

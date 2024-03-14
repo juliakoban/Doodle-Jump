@@ -41,6 +41,7 @@ public:
     void drawEnd();
     void handleInput();
     void restart();
+    void reset();
     void run();
     
 };

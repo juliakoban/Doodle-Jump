@@ -56,9 +56,7 @@ void Player::death() {
 }
 
 void Player::restart() {
-    this->x_ = 100;
-    this->y_ = 400;
-    this->sprite_.setPosition(x_, y_);
+    this->setPosition(100, 400);
     delete this->jumping_;
     this->jumping_ = new JumpingState;
 }

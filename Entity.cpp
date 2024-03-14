@@ -66,6 +66,13 @@ void Entity::setX(float x) {
     this->x_ = x;
 }
 
+void Entity::setPosition(float x, float y) {
+    this->x_ = x;
+    this->y_ = y;
+    this->sprite_.setPosition(x_, y_);
+    this->collider_->updatePosition(x_, y_);
+}
+
 void Entity::subtractDyfromY(float dy) {
     this->y_ -= dy;
 }
