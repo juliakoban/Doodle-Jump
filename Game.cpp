@@ -23,6 +23,7 @@ Game::~Game() {
     entities.clear();
     delete collisionHandler;
     delete camera;
+    delete score;
 }
 
 void Game::initalizeBackground() {
@@ -33,6 +34,7 @@ void Game::initalizeBackground() {
 void Game::initalizeGameObjects() {
     collisionHandler = new CollisionHandler();
     camera = new Camera();
+    score = new Score();
 
     float platformX = 0, platformY = 0;
     float platformWidth = 70, platformHeight = 30;
@@ -53,17 +55,24 @@ void Game::initalizeGameObjects() {
 
 void Game::updateObjects() {
     collisionHandler->checkCollisions(entities);
-    camera->movementSimulation(entities);
+    camera->movementSimulation(entities, score);
 
     for(int i = 0; i < entities.size(); i++) {
             entities.at(i)->update();
         }
 }
+
+void Game::drawScore() {
+    window.draw(score->toText());
+}
+
 void Game::drawObjects() {
     window.draw(background);
+    
     for(int i = 0; i < entities.size(); i++) {
             entities.at(i)->draw(window);
         }
+    drawScore();
 }
 
 void Game::drawMenu() {
@@ -101,6 +110,7 @@ void Game::restart()
             entities.at(i + 2)->setPosition(rand() % int(window_width - startingPlatform->getWidth()),
             i * (window_height / numberOfPlatforms));
         }
+    score->restart();
     
 }
 

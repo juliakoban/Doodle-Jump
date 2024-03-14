@@ -1,6 +1,7 @@
 #include "Camera.h"
 
-void Camera::movementSimulation(std::vector<Entity*> gameobjects) {
+
+void Camera::movementSimulation(std::vector<Entity*> gameobjects, Score* score) {
     if (gameobjects.at(0)->getY() < window_height / 2) {
         gameobjects.at(0)->setY(window_height / 2);
 
@@ -9,6 +10,7 @@ void Camera::movementSimulation(std::vector<Entity*> gameobjects) {
                 if (gameobjects.at(i)->getY() > window_height) {
                     gameobjects.at(i)->setY(0);
                     gameobjects.at(i)->setX(rand() % int(window_width - gameobjects.at(i)->getWidth()));
+                    score->update();
                 }
             }
     }

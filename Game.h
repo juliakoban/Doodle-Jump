@@ -5,6 +5,7 @@
 #include "Entity.h"
 #include "Player.h"
 #include "Camera.h"
+#include "Score.h"
 #include "CollisionHandler.h"
 #include <iostream>
 #include <vector>
@@ -33,12 +34,14 @@ private:
     CollisionHandler* collisionHandler;
     Camera* camera;
     GameState state;
+    Score* score;
 public:
     Game();
     ~Game();
     void initalizeBackground();
     void initalizeGameObjects();
     void updateObjects();
+    void drawScore();
     void drawObjects();
     void drawMenu();
     void drawEnd();
