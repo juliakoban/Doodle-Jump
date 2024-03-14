@@ -6,6 +6,14 @@ Game::Game() : window(sf::VideoMode(window_width, window_height), "Doodle Jump",
     window.setFramerateLimit(60);
     initalizeBackground();
     initalizeGameObjects();
+    if (!font.loadFromFile("./assets/DoodleJump.ttf"))
+    {
+        std::cout << "Loading Font Error" << std::endl;
+    }
+    text.setFont(font);
+    text.setCharacterSize(50);
+    text.setFillColor(sf::Color::Black);
+    text.setPosition(window_width / 5, window_height / 3);
 }
 
 Game::~Game() {
@@ -59,21 +67,22 @@ void Game::drawObjects() {
 }
 
 void Game::drawMenu() {
+    text.setString("Press ENTER \n to START!");
     window.draw(background);
+    window.draw(text);
 }
 
 void Game::drawEnd() {
+    text.setString("Press ENTER \n to RESTART!");
     window.draw(background);
+    window.draw(text);
 }
 
 void Game::handleInput() {
     if (state == GameState::Menu && sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter)) {
-        std::cout << "playing" << std::endl;
         state = GameState::Playing;
     }
     else if(state == GameState::Playing && player->isDead()) {
-        std::cout << "death" << std::endl;
-        reset();
         state = GameState::End;
     }
     else if(state == GameState::End && sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter)) {
@@ -81,12 +90,6 @@ void Game::handleInput() {
         state = GameState::Playing;
     }
 
-}
-
-void Game::reset() {
-    for(int i = 0; i < entities.size(); i++) {
-            entities.at(i)->setPosition(window_height, window_height);
-        }
 }
 
 void Game::restart()

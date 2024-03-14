@@ -8,6 +8,7 @@
 #include "CollisionHandler.h"
 #include <iostream>
 #include <vector>
+#include <string>
 
 const int screen_width = 1920;
 const int screen_height = 1080;
@@ -23,6 +24,8 @@ private:
     sf::RenderWindow window;
     sf::Texture background_texture;
     sf::Sprite background;
+    sf::Text text;
+    sf::Font font;
     int numberOfPlatforms = 7;
     std::vector<Entity*> entities;
     Player* player;
@@ -41,7 +44,6 @@ public:
     void drawEnd();
     void handleInput();
     void restart();
-    void reset();
     void run();
     
 };
