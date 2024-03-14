@@ -1,5 +1,6 @@
 #include "EntityState.h"
 #include "Entity.h"
+#include "Player.h"
 #include <SFML/Graphics.hpp>
 
 void IdleState::update(Entity* entity) {
@@ -42,6 +43,16 @@ void FiringState::update(Entity* entity) {
 void FiringState::enter(Entity* entity) {
     entity->changeSprite("./assets/player_firing.png");
     // std::cout << "Entering firing state" << std::endl;
+}
+
+void Death::update(Entity* entity) {
+    entity->death();
+    // if (Player* player = dynamic_cast<Player*>(entity)) {
+    //     std::cout <<"special action for player" << std::endl;
+    // }
+}
+void Death::enter(Entity* entity) {
+    entity->changeSprite("./assets/empty_sprite.png");
 }
 
 

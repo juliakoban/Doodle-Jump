@@ -50,4 +50,10 @@ public:
     void enter(Entity* entity) override;
 };
 
+class Death: public EntityState {
+public:
+    void update(Entity* entity) override;
+    void enter(Entity* entity) override;
+};
+
 #endif // ENTITY_STATE_H

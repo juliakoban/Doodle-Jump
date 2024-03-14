@@ -15,6 +15,7 @@ public:
     void handleCollision();
     void move(float dx, float dy);
     void update();
+    void death();
 };
 
 #endif // PLAYER_H

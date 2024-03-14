@@ -1,8 +1,8 @@
 #include "Player.h"
 #include "EntityState.h"
 
-const int window_width = 400;
-const int window_height = 533;
+// const int window_width = 400;
+// const int window_height = 533;
 
 void Player::move(float dx, float dy) {
     
@@ -27,6 +27,9 @@ void Player::handleState() {
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
         this->setState(new FiringState);
     } 
+    else if ((this->y_ + this->height_) >= window_height) {
+        this->setState(new Death);
+    } 
     else {this->setState(new IdleState);}
     
     state_->enter(this);
@@ -42,4 +45,12 @@ void Player::handleCollision() {
 
 void Player::update() {
     this->handleState();
+}
+
+void Player::death() {
+    this->x_ = window_width;
+    this->y_ = window_height;
+    this->sprite_.setPosition(x_, y_);
+    delete this->jumping_;
+    this->jumping_ = new IdleState; 
 }

@@ -5,9 +5,6 @@
 #include <string>
 #include <iostream>
 
-const int window_width = 400;
-const int window_height = 533;
-
 Entity::Entity(const std::string path, float scale, float x, float y, float dx, float dy){
     texture_.loadFromFile(path);
     sprite_.setTexture(texture_);
@@ -47,6 +44,14 @@ float Entity::getX() {
 
 float Entity::getY() {
     return this->y_;
+}
+
+float Entity::getWidth() {
+    return this->width_;
+}
+
+float Entity::getHeight() {
+    return this->height_;
 }
 
 float Entity::getDY() {

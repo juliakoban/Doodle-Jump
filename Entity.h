@@ -7,6 +7,8 @@
 #include "EntityState.h"
 #include "Collider.h"
 
+const int window_width = 400;
+const int window_height = 533;
 
 class Entity {
 protected:
@@ -31,8 +33,11 @@ public:
     virtual void handleCollision() {}
     virtual void update() {}
     bool collidesWith(Entity* other) {return collider_->intersects(other->collider_);}
+    void death() {}
     float getY();
     float getX();
+    float getWidth();
+    float getHeight();
     float getDY();
     void setY(float y);
     void setX(float x);
@@ -42,7 +47,7 @@ public:
 class Platform: public Entity {
 public:
     Platform(const std::string path, float scale = 1, float x = 0, float y = 0, float dx = 0, float dy = 0) :
-    Entity(path, scale, x, y, dx, dy) {collider_ = new Collider(x_, y_, width_, height_, 0, 5);}
+    Entity(path, scale, x, y, dx, dy) {collider_ = new Collider(x_, y_, width_, height_, 0, -10);}
     void handleState();
     void move(float dx, float dy);
     void update();

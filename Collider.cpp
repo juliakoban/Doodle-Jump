@@ -13,7 +13,6 @@ Collider::Collider(float x, float y, float width, float height, float offsetX, f
     bottom = y_ + height_;
     left = x_;
     right = x_ + width_;
-
 }
 
 void Collider::updatePosition(float x, float y) {
