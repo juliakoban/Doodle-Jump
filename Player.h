@@ -16,6 +16,8 @@ public:
     void move(float dx, float dy);
     void update();
     void death();
+    bool isDead();
+    void restart();
 };
 
 #endif // PLAYER_H

@@ -82,3 +82,7 @@ void Platform::update() {
     this->sprite_.setPosition(this->x_, this->y_);
     this->collider_->updatePosition(this->x_, this->y_);
 }
+
+void Platform::restart() {
+    
+}

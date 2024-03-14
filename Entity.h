@@ -34,6 +34,7 @@ public:
     virtual void update() {}
     bool collidesWith(Entity* other) {return collider_->intersects(other->collider_);}
     void death() {}
+    void restart() {}
     float getY();
     float getX();
     float getWidth();
@@ -51,6 +52,7 @@ public:
     void handleState();
     void move(float dx, float dy);
     void update();
+    void restart();
 };
 
 #endif // ENTITY_H

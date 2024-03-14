@@ -27,7 +27,7 @@ void Player::handleState() {
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
         this->setState(new FiringState);
     } 
-    else if ((this->y_ + this->height_) >= window_height) {
+    else if (isDead()) {
         this->setState(new Death);
     } 
     else {this->setState(new IdleState);}
@@ -53,4 +53,19 @@ void Player::death() {
     this->sprite_.setPosition(x_, y_);
     delete this->jumping_;
     this->jumping_ = new IdleState; 
+}
+
+void Player::restart() {
+    this->x_ = 100;
+    this->y_ = 400;
+    this->sprite_.setPosition(x_, y_);
+    delete this->jumping_;
+    this->jumping_ = new JumpingState;
+}
+
+bool Player::isDead() {
+    if ((this->y_ + this->height_) >= window_height) {
+        return true;
+    }
+    return false;
 }
