@@ -1,6 +1,6 @@
 # Doodle Jump Game 
 
-![Doodle Jump](doodle.gif)
+![Doodle Jump](assets/gif/doodle.gif)
 
 ## Description 
 This project is a clone of the popular game Doodle Jump build with C++ and SFML. It was developed with the primary goal of learning and practicing Object-Oriented Programming principles and design patterns. The game features a jumping character that must navigate platforms and reach new heights. Future development plans include the integration of additional features, such as defeating monsters and incorporating a jetpack mechanism.
@@ -20,7 +20,7 @@ $ git clone https://github.com/juliakoban/Doodle-Jump.git
 ```
 $ cd Doodle-Jump
 ```
-1. Compile and run the game:
+3. Compile and run the game:
 ```
 $ make
 $ make run
