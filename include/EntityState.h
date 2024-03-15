@@ -9,6 +9,7 @@ class Entity;
 
 class EntityState {
 public:
+    virtual ~EntityState() {} 
     virtual void update(Entity* entity) = 0;
     virtual void enter(Entity* entity) = 0;
 };

@@ -6,7 +6,7 @@ Game::Game() : window(sf::VideoMode(window_width, window_height), "Doodle Jump",
     window.setFramerateLimit(60);
     initalizeBackground();
     initalizeGameObjects();
-    if (!font.loadFromFile("./assets/DoodleJump.ttf"))
+    if (!font.loadFromFile("./assets/fonts/DoodleJump.ttf"))
     {
         std::cout << "Loading Font Error" << std::endl;
     }
@@ -27,7 +27,7 @@ Game::~Game() {
 }
 
 void Game::initalizeBackground() {
-    background_texture.loadFromFile("./assets/background.png");
+    background_texture.loadFromFile("./assets/sprites/background.png");
     background.setTexture(background_texture);
 }
 
@@ -37,19 +37,18 @@ void Game::initalizeGameObjects() {
     score = new Score();
 
     float platformX = 0, platformY = 0;
-    float platformWidth = 70, platformHeight = 30;
 
-    player = new Player("./assets/player_right.png", 0.6, 100, 400);
+    player = new Player("./assets/sprites/player_right.png", 0.6, 100, 400);
     entities.push_back(player);
 
-    startingPlatform = new Platform("./assets/platform.png", 1.2, 100, 500); 
+    startingPlatform = new Platform("./assets/sprites/platform.png", 1.2, 100, 500); 
 
     entities.push_back(startingPlatform);
 
     for (int i = 0; i < (numberOfPlatforms - 1); i++) {
         platformX = rand() % int(window_width - startingPlatform->getWidth());
         platformY = i * (window_height / numberOfPlatforms);
-        entities.push_back(new Platform("./assets/platform.png", 1.2, platformX, platformY));
+        entities.push_back(new Platform("./assets/sprites/platform.png", 1.2, platformX, platformY));
     }
 }
 
@@ -57,7 +56,7 @@ void Game::updateObjects() {
     collisionHandler->checkCollisions(entities);
     camera->movementSimulation(entities, score);
 
-    for(int i = 0; i < entities.size(); i++) {
+    for(int i = 0; i < static_cast<int>(entities.size()); i++) {
             entities.at(i)->update();
         }
 }
@@ -69,7 +68,7 @@ void Game::drawScore() {
 void Game::drawObjects() {
     window.draw(background);
     
-    for(int i = 0; i < entities.size(); i++) {
+    for(int i = 0; i < static_cast<int>(entities.size()); i++) {
             entities.at(i)->draw(window);
         }
     drawScore();

@@ -33,7 +33,6 @@ bool Collider::intersects(Collider* other) {
 
     if (upCollision && horizontalCollision) {
         // std::cout << " up collision" << std::endl;
-        // std::cout << left << " " << top << " " << right << " " << bottom << std::endl;
         return true;
     }
     return false;

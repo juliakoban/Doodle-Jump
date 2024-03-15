@@ -6,7 +6,7 @@ const int window_width = 400;
 const int window_height = 533;
 
 Score::Score() {
-    if (!font.loadFromFile("./assets/DoodleJump.ttf"))
+    if (!font.loadFromFile("./assets/fonts/DoodleJump.ttf"))
     {
         std::cout << "Loading Font Error" << std::endl;
     }

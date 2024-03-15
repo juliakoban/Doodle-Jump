@@ -16,7 +16,7 @@ void RightWalkingState::update(Entity* entity) {
     // std::cout << "Handling right walking state" << std::endl;    
 }
 void RightWalkingState::enter(Entity* entity) {
-    entity->changeSprite("./assets/player_right.png");
+    entity->changeSprite("./assets/sprites/player_right.png");
     // std::cout << "Entering right walking state" << std::endl;  
 }
 
@@ -25,7 +25,7 @@ void LeftWalkingState::update(Entity* entity) {
     // std::cout << "Handling left walking state" << std::endl;
 }
 void LeftWalkingState::enter(Entity* entity) {
-    entity->changeSprite("./assets/player_left.png");
+    entity->changeSprite("./assets/sprites/player_left.png");
     // std::cout << "Entering left walking state" << std::endl;
 }
 
@@ -41,7 +41,7 @@ void FiringState::update(Entity* entity) {
     // std::cout << "Handling firing state" << std::endl;
 }
 void FiringState::enter(Entity* entity) {
-    entity->changeSprite("./assets/player_firing.png");
+    entity->changeSprite("./assets/sprites/player_firing.png");
     // std::cout << "Entering firing state" << std::endl;
 }
 
@@ -52,7 +52,7 @@ void Death::update(Entity* entity) {
     // }
 }
 void Death::enter(Entity* entity) {
-    entity->changeSprite("./assets/empty_sprite.png");
+    entity->changeSprite("./assets/sprites/empty_sprite.png");
 }
 
 

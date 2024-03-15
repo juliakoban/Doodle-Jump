@@ -23,7 +23,7 @@ protected:
  
 public:
     Entity(const std::string path, float scale = 1, float x = 0, float y = 0, float dx = 0, float dy = 0);
-    ~Entity() {delete state_; delete collider_;}
+    virtual ~Entity() {delete state_; delete collider_;}
     void draw(sf::RenderWindow &window);
     void changeSprite(const std::string path);
     void setState(EntityState* newState) {delete state_; state_ = newState;}

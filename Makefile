@@ -1,17 +1,33 @@
-build:
-	g++ -c ./main.cpp
-	g++ -c Game.cpp -o Game.o
-	g++ -c Entity.cpp -o Entity.o
-	g++ -c Score.cpp -o Score.o
-	g++ -c Camera.cpp -o Camera.o
-	g++ -c CollisionHandler.cpp -o CollisionHandler.o
-	g++ -c Player.cpp -o Player.o
-	g++ -c Collider.cpp -o Collider.o
-	g++ -c EntityState.cpp -o EntityState.o
-	g++ main.o Entity.o EntityState.o Player.o Collider.o CollisionHandler.o Camera.o Game.o Score.o -o app -lsfml-graphics -lsfml-window -lsfml-system
+# Compiler
+CXX = g++
 
-clean:
-	rm *.o
-	rm app
+# Compiler flags
+CXXFLAGS = -std=c++11 -Wall
+
+# Directories containing header files
+INC_DIRS = -Iinclude
+
+# Linker flags
+LDFLAGS = -lsfml-graphics -lsfml-window -lsfml-system
+
+# Source files
+SRCS = main.cpp Entity.cpp EntityState.cpp Player.cpp Collider.cpp CollisionHandler.cpp Camera.cpp Game.cpp Score.cpp
+
+# Object files
+OBJS = $(SRCS:.cpp=.o)
+
+# Main target
+app: $(OBJS)
+	$(CXX) $(OBJS) -o $@ $(LDFLAGS)
+
+# Rule to compile .cpp files to .o files
+%.o: src/%.cpp
+	$(CXX) $(CXXFLAGS) $(INC_DIRS) -c $< -o $@
+
+# Run
 run:
 	./app
+
+# Clean
+clean:
+	rm -f $(OBJS) app
